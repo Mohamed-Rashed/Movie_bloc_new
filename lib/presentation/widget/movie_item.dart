@@ -5,8 +5,9 @@ import 'package:movie_app_blocd/data/models/popularMovies_model.dart';
 
 class MovieItem extends StatelessWidget {
   final Results movie;
+  bool isfirstList;
 
-  const MovieItem({Key? key, required this.movie}) : super(key: key);
+  MovieItem({Key? key, required this.movie, required this.isfirstList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,21 +15,23 @@ class MovieItem extends StatelessWidget {
       margin: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       padding: EdgeInsetsDirectional.all(4),
       child: InkWell(
-        /*onTap: () => Navigator.pushNamed(context, movieDetailsRoute,
-            arguments: character),*/
+        onTap: () => Navigator.pushNamed(context, movieDetailsRoute, arguments: {movie , isfirstList}),
         child: Stack(
           children: [
-            Container(
-              height: 300,
-              width: 200,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: NetworkImage(
-                      "${imgUrl + movie.posterPath}",
-                    ),
-                  )),
+            Hero(
+              tag: isfirstList ? movie.id : "${movie.id} genres",
+              child: Container(
+                height: 300,
+                width: 200,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: NetworkImage(
+                        "${imgUrl + movie.posterPath}",
+                      ),
+                    )),
+              ),
             ),
             Positioned(
               bottom: 0,
