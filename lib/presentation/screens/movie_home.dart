@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:movie_app_blocd/business_logic/cubit/genres_cubit.dart';
 import 'package:movie_app_blocd/business_logic/cubit/moviesbygenres_cubit.dart';
 import 'package:movie_app_blocd/business_logic/cubit/popularmovies_cubit.dart';
 import 'package:movie_app_blocd/constant/myColor.dart';
 import 'package:movie_app_blocd/data/models/genres_model.dart';
+import 'package:movie_app_blocd/data/models/hero_tag.dart';
 import 'package:movie_app_blocd/data/models/popularMovies_model.dart';
 import 'package:movie_app_blocd/presentation/widget/movie_item.dart';
 
@@ -21,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<PopularMoviesModel>? moviesbyGenres;
   int genresID = 28;
   String genresname = "Action";
+  HeroTag heroTag = GetIt.instance.get<HeroTag>();
 
   @override
   void initState() {

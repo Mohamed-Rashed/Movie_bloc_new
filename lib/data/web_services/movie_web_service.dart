@@ -79,4 +79,38 @@ class MovieWebServices {
       return [];
     }
   }
+
+
+  ////////////////////////////////////////////////////////////////
+
+  Future<List<dynamic>> getMoviesCharacters(int movieId) async {
+    List<dynamic> myData = [];
+    try {
+      Response response = await dio
+          .get('movie/$movieId/credits?api_key=$myApikey&language=en-US');
+      print(response.data.toString());
+      myData.add(response.data);
+      return myData;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
+
+
+  ////////////////////////////////////////////////////////////////
+
+  Future<List<dynamic>> getMoviesVideos(int movieId) async {
+    List<dynamic> myData = [];
+    try {
+      Response response = await dio
+          .get('movie/$movieId/videos?api_key=$myApikey&language=en-US');
+      print(response.data.toString());
+      myData.add(response.data);
+      return myData;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
 }

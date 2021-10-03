@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:movie_app_blocd/constant/myColor.dart';
 import 'package:movie_app_blocd/constant/strings.dart';
+import 'package:movie_app_blocd/data/models/hero_tag.dart';
 import 'package:movie_app_blocd/data/models/popularMovies_model.dart';
 
 class MovieItem extends StatelessWidget {
   final Results movie;
   bool isfirstList;
+  HeroTag heroTag = GetIt.instance.get<HeroTag>();
 
-  MovieItem({Key? key, required this.movie, required this.isfirstList}) : super(key: key);
+  MovieItem({Key? key, required this.movie,required this.isfirstList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,19 @@ class MovieItem extends StatelessWidget {
       margin: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
       padding: EdgeInsetsDirectional.all(4),
       child: InkWell(
-        onTap: () => Navigator.pushNamed(context, movieDetailsRoute, arguments: {movie , isfirstList}),
+        onTap: (){
+          if(isfirstList){
+            heroTag.value = isfirstList;
+          }
+          else{
+            heroTag.value = false;
+          }
+          Navigator.pushNamed(context, movieDetailsRoute, arguments: movie);
+        },
         child: Stack(
           children: [
             Hero(
-              tag: isfirstList ? movie.id : "${movie.id} genres",
+              tag: isfirstList ? movie.id : "${movie.id} genre}",
               child: Container(
                 height: 300,
                 width: 200,

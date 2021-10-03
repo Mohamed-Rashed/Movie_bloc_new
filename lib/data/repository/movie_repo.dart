@@ -1,5 +1,7 @@
 import 'package:movie_app_blocd/data/models/genres_model.dart';
+import 'package:movie_app_blocd/data/models/movie_characters.dart';
 import 'package:movie_app_blocd/data/models/movie_details_model.dart';
+import 'package:movie_app_blocd/data/models/movie_videos_model.dart';
 import 'package:movie_app_blocd/data/models/popularMovies_model.dart';
 import 'package:movie_app_blocd/data/web_services/movie_web_service.dart';
 
@@ -37,6 +39,24 @@ class MovieRepository {
     final movieDetails = await movieWebServices.getMoviesDetails(movieId);
     return movieDetails
         .map((movieDetails) => MovieDetailsModel.fromJson(movieDetails))
+        .toList();
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  Future<List<MovieCharacters>> getMoviesCharacters(int movieId) async {
+    final movieCharacters = await movieWebServices.getMoviesCharacters(movieId);
+    return movieCharacters
+        .map((movieCharacters) => MovieCharacters.fromJson(movieCharacters))
+        .toList();
+  }
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  Future<List<MovieVideosModel>> getMoviesVideos(int movieId) async {
+    final moviesVideos = await movieWebServices.getMoviesVideos(movieId);
+    return moviesVideos
+        .map((moviesVideos) => MovieVideosModel.fromJson(moviesVideos))
         .toList();
   }
 }

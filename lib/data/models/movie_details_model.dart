@@ -2,7 +2,6 @@ class MovieDetailsModel {
   MovieDetailsModel({
     required this.adult,
     required this.backdropPath,
-    required this.belongsToCollection,
     required this.budget,
     required this.genres,
     required this.homepage,
@@ -28,7 +27,6 @@ class MovieDetailsModel {
   });
   late final bool adult;
   late final String backdropPath;
-  late final BelongsToCollection belongsToCollection;
   late final int budget;
   late final List<Genres> genres;
   late final String homepage;
@@ -55,7 +53,6 @@ class MovieDetailsModel {
   MovieDetailsModel.fromJson(Map<String, dynamic> json){
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
-    belongsToCollection = BelongsToCollection.fromJson(json['belongs_to_collection']);
     budget = json['budget'];
     genres = List.from(json['genres']).map((e)=>Genres.fromJson(e)).toList();
     homepage = json['homepage'];
@@ -84,7 +81,6 @@ class MovieDetailsModel {
     final _data = <String, dynamic>{};
     _data['adult'] = adult;
     _data['backdrop_path'] = backdropPath;
-    _data['belongs_to_collection'] = belongsToCollection.toJson();
     _data['budget'] = budget;
     _data['genres'] = genres.map((e)=>e.toJson()).toList();
     _data['homepage'] = homepage;
@@ -111,34 +107,6 @@ class MovieDetailsModel {
   }
 }
 
-class BelongsToCollection {
-  BelongsToCollection({
-    required this.id,
-    required this.name,
-    required this.posterPath,
-    this.backdropPath,
-  });
-  late final int id;
-  late final String name;
-  late final String posterPath;
-  late final Null backdropPath;
-
-  BelongsToCollection.fromJson(Map<String, dynamic> json){
-    id = json['id'];
-    name = json['name'];
-    posterPath = json['poster_path'];
-    backdropPath = json['backdrop_path'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['id'] = id;
-    _data['name'] = name;
-    _data['poster_path'] = posterPath;
-    _data['backdrop_path'] = backdropPath;
-    return _data;
-  }
-}
 
 class Genres {
   Genres({
