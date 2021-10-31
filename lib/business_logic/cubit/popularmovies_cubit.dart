@@ -8,6 +8,8 @@ part 'popularmovies_state.dart';
 class PopularmoviesCubit extends Cubit<PopularmoviesState> {
   final MovieRepository movieRepository;
   List<PopularMoviesModel> popularMovies = [];
+  List<PopularMoviesModel> searchedMovies = [];
+  List<PopularMoviesModel> similarMovies = [];
 
   PopularmoviesCubit(this.movieRepository) : super(PopularmoviesInitial());
 
@@ -17,5 +19,22 @@ class PopularmoviesCubit extends Cubit<PopularmoviesState> {
       this.popularMovies = popularMovies;
     });
     return popularMovies;
+  }
+
+  List<PopularMoviesModel> getSearchedMovie(String searchName) {
+    movieRepository.getSearchedMovie(searchName).then((searchedMovies) {
+      emit(SearchedMoviesLoaded(searchedMovies));
+      this.searchedMovies = searchedMovies;
+    });
+    return searchedMovies;
+  }
+
+
+  List<PopularMoviesModel> getSimilarMovies(int movieID) {
+    movieRepository.getSimilarMovies(movieID).then((similarMovies) {
+      emit(SimilarMoviesLoaded(similarMovies));
+      this.similarMovies = similarMovies;
+    });
+    return similarMovies;
   }
 }

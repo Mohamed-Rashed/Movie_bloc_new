@@ -1,40 +1,20 @@
 class PopularMoviesModel {
   PopularMoviesModel({
-    required this.page,
     required this.results,
-    required this.totalPages,
-    required this.totalResults,
   });
-  late final int page;
   late final List<Results> results;
-  late final int totalPages;
-  late final int totalResults;
 
   PopularMoviesModel.fromJson(Map<String, dynamic> json) {
-    page = json['page'];
-    results =
-        List.from(json['results']).map((e) => Results.fromJson(e)).toList();
-    totalPages = json['total_pages'];
-    totalResults = json['total_results'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['page'] = page;
-    _data['results'] = results.map((e) => e.toJson()).toList();
-    _data['total_pages'] = totalPages;
-    _data['total_results'] = totalResults;
-    return _data;
+    results = json['results'] != null
+        ? List.from(json['results']).map((e) => Results.fromJson(e)).toList()
+        : List.from(json['cast']).map((e) => Results.fromJson(e)).toList();
   }
 }
 
 class Results {
   Results({
     required this.adult,
-    required this.backdropPath,
-    required this.genreIds,
     required this.id,
-    required this.originalLanguage,
     required this.originalTitle,
     required this.overview,
     required this.popularity,
@@ -45,27 +25,21 @@ class Results {
     required this.voteAverage,
     required this.voteCount,
   });
-  late final bool adult;
-  late final String backdropPath;
-  late final List<int> genreIds;
-  late final int id;
-  late final String originalLanguage;
-  late final String originalTitle;
-  late final String overview;
-  late final double popularity;
-  late final String posterPath;
-  late final String releaseDate;
-  late final String title;
-  late final bool video;
+  late final bool? adult;
+  late final int? id;
+  late final String? originalTitle;
+  late final String? overview;
+  late final num? popularity;
+  late final String? posterPath;
+  late final String? releaseDate;
+  late final String? title;
+  late final bool? video;
   late final num? voteAverage;
-  late final int voteCount;
+  late final int? voteCount;
 
   Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
-    backdropPath = json['backdrop_path'];
-    genreIds = List.castFrom<dynamic, int>(json['genre_ids']);
     id = json['id'];
-    originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
     popularity = json['popularity'];
@@ -80,10 +54,7 @@ class Results {
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['adult'] = adult;
-    _data['backdrop_path'] = backdropPath;
-    _data['genre_ids'] = genreIds;
     _data['id'] = id;
-    _data['original_language'] = originalLanguage;
     _data['original_title'] = originalTitle;
     _data['overview'] = overview;
     _data['popularity'] = popularity;

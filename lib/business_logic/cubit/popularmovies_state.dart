@@ -10,3 +10,15 @@ class PopularMoviesLoaded extends PopularmoviesState {
 
   PopularMoviesLoaded(this.popularMovies);
 }
+
+class SearchedMoviesLoaded extends PopularmoviesState {
+  final List<PopularMoviesModel> searchedMovies;
+
+  SearchedMoviesLoaded(this.searchedMovies);
+}
+
+class SimilarMoviesLoaded extends PopularmoviesState {
+  final List<PopularMoviesModel> similarMovies;
+
+  SimilarMoviesLoaded(this.similarMovies);
+}

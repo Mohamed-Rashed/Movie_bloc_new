@@ -113,4 +113,94 @@ class MovieWebServices {
       return [];
     }
   }
+
+
+
+  ////////////////////////////////////////////////////////////////
+
+  Future<List<dynamic>> getSearchedMovie(String searchName) async {
+    List<dynamic> myData = [];
+    try {
+      Response response = await dio
+          .get('search/movie?api_key=$myApikey&language=en-US&query=$searchName&page=1&include_adult=false');
+      print(response.data.toString());
+      myData.add(response.data);
+      return myData;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
+
+
+
+  ////////////////////////////////////////////////////////////////
+
+  Future<List<dynamic>> getSimilarMovies(int movieID) async {
+    List<dynamic> myData = [];
+    try {
+      Response response = await dio
+          .get('movie/$movieID/similar?api_key=$myApikey&language=en-US&page=1');
+      print(response.data.toString());
+      myData.add(response.data);
+      return myData;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
+
+
+
+  ////////////////////////////////////////////////////////////////
+
+  Future<List<dynamic>> getCastMovies(int castID) async {
+    List<dynamic> myData = [];
+    try {
+      Response response = await dio
+          .get('person/$castID/movie_credits?api_key=$myApikey&language=en-US');
+      print(response.data.toString());
+      myData.add(response.data);
+      return myData;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
+
+
+
+  ////////////////////////////////////////////////////////////////
+
+  Future<List<dynamic>> getCastDetails(int castID) async {
+    List<dynamic> myData = [];
+    try {
+      Response response = await dio
+          .get('person/$castID?api_key=$myApikey&language=en-US');
+      print(response.data.toString());
+      myData.add(response.data);
+      return myData;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
+
+
+
+  ////////////////////////////////////////////////////////////////
+
+  Future<List<dynamic>> getArtistsSearch(String artistName) async {
+    List<dynamic> myData = [];
+    try {
+      Response response = await dio
+          .get('search/person?query=$artistName&api_key=$myApikey');
+      print(response.data.toString());
+      myData.add(response.data);
+      return myData;
+    } catch (e) {
+      print(e.toString());
+      return [];
+    }
+  }
 }
